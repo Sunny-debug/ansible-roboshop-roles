@@ -1,0 +1,47 @@
+---
+- name: create ec2 and r53
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    ami_id: ami-09c813fb71547fc4f
+    sg_id: sg-0503154617763dfc9
+    zone_id: Z0095538Q74XD6XU6M0Z
+    domain_name: "dawgs.online"
+
+  tasks:
+    - name: create ec2 instance
+      amazon.aws.ec2_instance:
+        name: "{{ item }}"
+        instance_type: t3.micro
+        security_group: "{{ sg_id }}"
+        image_id: "{{ ami_id }}"
+        tags:
+          Name: "{{ item }}"
+      loop: "{{ instance }}"
+      register: ec2_output
+
+    - name: create route53 records for private services (not frontend)
+      amazon.aws.route53:
+        state: present
+        zone: "{{ domain_name }}"
+        record: "{{ item.item }}.{{ domain_name }}"
+        type: A
+        ttl: 1
+        value: "{{ item.instances[0].private_ip_address }}"
+        overwrite: true
+      when: item.item != "frontend"
+      loop: "{{ ec2_output.results }}"
+
+    - name: create route53 record for root domain (frontend public)
+      amazon.aws.route53:
+        state: present
+        zone: "{{ domain_name }}"
+        record: "{{ domain_name }}"   # ROOT / APEX RECORD
+        type: A
+        ttl: 1
+        value: "{{ item.instances[0].public_ip_address }}"
+        overwrite: true
+      when: item.item == "frontend"
+      loop: "{{ ec2_output.results }}"
