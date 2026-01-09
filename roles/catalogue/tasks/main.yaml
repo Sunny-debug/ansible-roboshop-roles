@@ -8,5 +8,31 @@
     name: common
     tasks_from: nodejs.yaml    
 
+- name: copy mongo repo
+  ansible.builtin.copy:
+    src: mongo.repo
+    dest: /etc/yum.repos.d/mongo.repo
 
+- name: install mongodb client
+  ansible.builtin.package:
+    name: mongodb-mongosh
+    state: present
+
+- name: connnect to mongodb catalogue
+  ansible.builtin.command: mongosh {{ MONGODB_HOST}} --quiet --eval "db.getMongo().getDBNames().indexOf('catalogue')"
+  register: catalogue_output
+
+- name: MongoDB connectivity check
+  ansible.builtin.command: >
+    mongosh "mongodb://{{ MONGODB_HOST}}:27017/?serverSelectionTimeoutMS=10000"
+    --quiet
+    --eval "db.runCommand({ping:1}).ok"
+  register: mongo_ping
+  retries: 6
+  delay: 5
+  until: mongo_ping.rc == 0 and mongo_ping.stdout.strip() == "1"  
+
+- name: load products into mongodb
+  ansible.builtin.shell: mongosh --host {{ MONGODB_HOST}} </app/db/master-data.js
+  when: catalogue_output.stdout | int < 0 
       
