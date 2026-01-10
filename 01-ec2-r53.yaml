@@ -25,6 +25,7 @@
     - name: create route53 records for private services (not frontend)
       amazon.aws.route53:
         state: present
+        hosted_zone_id: "{{ zone_id }}"
         zone: "{{ domain_name }}"
         record: "{{ item.item }}.{{ domain_name }}"
         type: A
@@ -37,11 +38,25 @@
     - name: create route53 record for root domain (frontend public)
       amazon.aws.route53:
         state: present
+        hosted_zone_id: "{{ zone_id }}"
         zone: "{{ domain_name }}"
         record: "{{ domain_name }}"   # ROOT / APEX RECORD
         type: A
         ttl: 1
         value: "{{ item.instances[0].public_ip_address }}"
+        overwrite: true
+      when: item.item == "frontend"
+      loop: "{{ ec2_output.results }}"
+
+    - name: create route53 record for frontend subdomain (frontend private)
+      amazon.aws.route53:
+        state: present
+        hosted_zone_id: "{{ zone_id }}"
+        zone: "{{ domain_name }}"
+        record: "frontend.{{ domain_name }}"
+        type: A
+        ttl: 1
+        value: "{{ item.instances[0].private_ip_address }}"
         overwrite: true
       when: item.item == "frontend"
       loop: "{{ ec2_output.results }}"
