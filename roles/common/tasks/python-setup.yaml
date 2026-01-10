@@ -1,0 +1,10 @@
+- name: install python package
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: present
+  loop:
+  - python3-pip 
+  - python3
+  - gcc
+  - python3-devel
+

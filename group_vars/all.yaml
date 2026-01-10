@@ -3,3 +3,5 @@ REDIS_HOST: redis.dawgs.online
 CATALOGUE_HOST: catalogue.dawgs.online
 MYSQL_HOST: mysql.dawgs.online
 CART_HOST: cart.dawgs.online
+USER_HOST: user.dawgs.online
+RABBITMQ_HOST: rabbitmq.dawgs.online
