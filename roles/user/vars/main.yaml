@@ -1,2 +1,2 @@
 REDIS_HOST: redis.dawgs.online
-MONGO_HOST: mongodb.dawgs.online
+MONGODB_HOST: mongodb.dawgs.online
