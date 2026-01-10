@@ -11,6 +11,6 @@
     chdir: /app
 
 - name: move jar file
-  ansible.builtin.command: mv target/{{ server_name }}-1.0.jar {{ server_name }}.jar
+  ansible.builtin.command: mv target/{{ server_name }}-{{ version }}.jar {{ server_name }}.jar
   args:
     chdir: /app    
