@@ -1,0 +1,16 @@
+- name: install maven and mysql client
+  ansible.builtin.package:
+    name:
+      - maven
+      - mysql
+    state: present
+
+- name: install dependencies (build jar)
+  ansible.builtin.command: mvn clean package
+  args:
+    chdir: /app
+
+- name: move jar file
+  ansible.builtin.command: mv target/{{ server_name }}-*.jar {{ server_name }}.jar
+  args:
+    chdir: /app    

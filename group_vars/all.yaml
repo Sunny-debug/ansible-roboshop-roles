@@ -1,3 +1,5 @@
 MONGODB_HOST: mongodb.dawgs.online
 REDIS_HOST: redis.dawgs.online
 CATALOGUE_HOST: catalogue.dawgs.online
+MYSQL_HOST: mysql.dawgs.online
+CART_HOST: cart.dawgs.online
