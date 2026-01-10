@@ -23,7 +23,7 @@
   community.mysql.mysql_db:
     state: import
     name: all
-    login_host: {{ MYSQL_HOST }}
+    login_host: "{{ MYSQL_HOST }}"
     login_user: "{{ MYSQL_ROOT_USER }}"
     login_password: "{{ MYSQL_ROOT_PASSWORD }}"
     target: "{{ item }}"
