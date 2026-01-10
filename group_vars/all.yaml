@@ -5,3 +5,6 @@ MYSQL_HOST: mysql.dawgs.online
 CART_HOST: cart.dawgs.online
 USER_HOST: user.dawgs.online
 RABBITMQ_HOST: rabbitmq.dawgs.online
+SHIPPING_HOST: shipping.dawgs.online
+PAYMENT_HOST: payment.dawgs.online
+
