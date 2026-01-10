@@ -19,6 +19,9 @@
     name: common
     tasks_from: java-setup.yaml 
 
+- name: install mysql module
+  ansible.builtin.command: pip3.9 install PyMySQL
+
 - name: import shipping data
   community.mysql.mysql_db:
     state: import
