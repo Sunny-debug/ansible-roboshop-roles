@@ -20,7 +20,11 @@
     tasks_from: java-setup.yaml 
 
 - name: install mysql module
-  ansible.builtin.command: pip3.9 install PyMySQL
+  ansible.builtin.pip:
+    executable: pip3.9
+    name: 
+      - PyMySQL
+      - cryptography
 
 - name: import shipping data
   community.mysql.mysql_db:
