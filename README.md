@@ -7,9 +7,9 @@ This project refactors a traditional Ansible playbook–based deployment into a 
 The intent is simple: **make automation scalable, maintainable, and production-ready**.
 
 ## Why This Matters
+- Uses DRY concept
 - Roles enforce **separation of concerns**
 - Faster debugging through **service isolation**
-- Safer changes with **predictable execution**
 - Ready for CI/CD and GitOps workflows
 
 ## What Was Improved
