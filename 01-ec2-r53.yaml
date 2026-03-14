@@ -5,7 +5,7 @@
   gather_facts: false
 
   vars:
-    ami_id: ami-09c813fb71547fc4f
+    ami_id: ami-0220d79f3f480ecf5
     sg_id: sg-0503154617763dfc9
     zone_id: Z0095538Q74XD6XU6M0Z
     domain_name: "dawgs.online"

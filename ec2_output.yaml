@@ -1,0 +1,7 @@
+- name: Print the output
+  hosts: local
+  become: yes
+  tasks: 
+  - name: Display
+    ansible.builtin.debug:
+    ec2_output
