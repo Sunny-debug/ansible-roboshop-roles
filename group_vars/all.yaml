@@ -1,10 +1,10 @@
-MONGODB_HOST: mongodb.dawgs.online
-REDIS_HOST: redis.dawgs.online
-CATALOGUE_HOST: catalogue.dawgs.online
-MYSQL_HOST: mysql.dawgs.online
-CART_HOST: cart.dawgs.online
-USER_HOST: user.dawgs.online
-RABBITMQ_HOST: rabbitmq.dawgs.online
-SHIPPING_HOST: shipping.dawgs.online
-PAYMENT_HOST: payment.dawgs.online
+MONGODB_HOST: mongodb-{{ env }}.dawgs.online
+REDIS_HOST: redis-{{ env }}.dawgs.online
+CATALOGUE_HOST: catalogue-{{ env }}.dawgs.online
+MYSQL_HOST: mysql-{{ env }}.dawgs.online
+CART_HOST: cart-{{ env }}.dawgs.online
+USER_HOST: user-{{ env }}.dawgs.online
+RABBITMQ_HOST: rabbitmq-{{ env }}.dawgs.online
+SHIPPING_HOST: shipping-{{ env }}.dawgs.online
+PAYMENT_HOST: payment-{{ env }}.dawgs.online
 
