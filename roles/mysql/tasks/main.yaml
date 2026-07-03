@@ -2,6 +2,12 @@
   ansible.builtin.package:
     name: mysql-server
     state: present
+- name: Install boto3 and botocore for aws_ssm lookup
+  pip:
+    name:
+      - boto3
+      - botocore
+    executable: pip3    
 - name: enable and start service
   ansible.builtin.service:
     name: mysqld
